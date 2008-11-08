@@ -1,0 +1,18 @@
+November 7, 2008:
+
+This plugin was written by Mike Doty <mike@psyguygames.com> and slightly modified by Vince Wadhwani <vince71@gmail.com>. The original Find in Documents plugin is Copyright (C) 2007 Mike Doty. Parts of this code were also taken from the SnapOpen plugin which is Copyright (C) 2006 Mads Buus Jensen <online@buus.net>.
+
+Limitations: many.. searching with special characters do not work.  Also, it will only open the file from the sidepane if you have a file open. Lastly, it only searches one directory down, so if you need to search the files in your Rails application directory make sure the file browser root is app.  If you're a  python programmer and want to improve the plugin, please share your changes with the community.
+
+Requirements: Gedit (of course) and the File Browser Pane plugin must be enabled.  
+
+Conflicts: Currently this plugin is known to conflict with the Find in Documents plugin
+
+Installation: Copy the files to ~/.gnome2/gedit/plugins
+
+Usage: In the sidepane, use the file browser plugin to open to the root of your application.  Click the FindinDocuments tab and enter a value to search by.  Click search and hopefully watch the results roll in.  Again, remember that special characters are not supported so instead of searching for <%= link_to foo, foo_path %> try just looking for link_to foo.
+
+The earlier Find in Documents plugin required that you have the document open in gedit.  This version allows you to search within any document in the root of the filebrowser pane (given the above limitations) If the previous behavior is preferable, please see download the original plugin from http://www.psyguygames.com/FindInDocuments_plugin.tar.gz
+
+--Vince Wadhwani
+
