@@ -206,9 +206,9 @@ class ResultsView(gtk.VBox):
                 filename = os.path.basename(pieces[0]) # We just want the filename, not the path
                 string = pieces[2].lstrip(" ") # Remove leading whitespace
 
-                # If we want to ignore comments, then we'll make sure it doesn't start with # or //                        
+                # If we want to ignore comments, then we'll make sure it doesn't start with # or // or other common comment patterns. In the future it would be great to do this in context to the file type
                 if (self.ignore_comments):
-                    if (not string.startswith("#") and not string.startswith("//")):
+                    if (not string.startswith("#") and not string.startswith("<!--") and not string.startswith("/*") and not string.startswith("//")):
                         self.search_data.append( ("%d" % (len(self.search_data) + 1), filename, line_number, pieces[0]) )
                 else:            
                     self.search_data.append( ("%d" % (len(self.search_data) + 1), filename, line_number, pieces[0]) )
