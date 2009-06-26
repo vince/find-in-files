@@ -3,7 +3,6 @@ import gtk
 import os
 import gconf
 import subprocess
-import commands
 
 class ResultsView(gtk.VBox):
     def __init__(self, geditwindow):
@@ -179,10 +178,14 @@ class ResultsView(gtk.VBox):
           location = fbroot.replace("file://", "")
         else:
           return
-        
-        #Search for the text in the subdirectory (location) using grep
+          
         search_text = self.search_form.get_text()
-        cmd=['grep', '-R', '-n', '-H', search_text, location]
+          
+        if (not self.case_sensitive):
+          cmd=['grep', '-R', '-n', '-H', '-i', search_text, location]
+        else:
+          cmd=['grep', '-R', '-n', '-H', search_text, location]
+
         output = subprocess.Popen(cmd, stdout=subprocess.PIPE)
         data = output.stdout.read()
         results = data.split('\n')
