@@ -2,6 +2,8 @@ import gedit
 import gtk
 import os
 import gconf
+import subprocess
+import commands
 
 class ResultsView(gtk.VBox):
     def __init__(self, geditwindow):
@@ -177,24 +179,17 @@ class ResultsView(gtk.VBox):
           location = fbroot.replace("file://", "")
         else:
           return
-
-        hooray = os.popen ("find " + location + " -type f -not -regex '.*/.svn.*'").readlines()
-        for hip in hooray:
-          string += " '%s'" % hip[:-1]
         
-        # str_case_operator will hold the "case insensitive" command if necessary
-        str_case_operator = ""
-        if (not self.case_sensitive):
-            str_case_operator = " -i"
-
-        # Create a pipe and call the grep command, then read it            
-        pipe = os.popen("grep -n -H" + str_case_operator + " %s %s" % (self.search_form.get_text(), string))
-        data = pipe.read()
-        results = data.split("\n")
+        #Search for the text in the subdirectory (location) using grep
+        search_text = self.search_form.get_text()
+        cmd=['grep', '-R', '-n', '-H', search_text, location]
+        output = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        data = output.stdout.read()
+        results = data.split('\n')
         
         # Clear any current results from the side panel
         self.search_data.clear()
-
+        
         # Process each result...        
         for each in results:
             # Each result will look like this:
