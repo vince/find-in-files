@@ -5,7 +5,9 @@ import gconf
 import subprocess
 
 class ResultsView(gtk.VBox):
-    def __init__(self, geditwindow):
+
+
+    def __init__(self, geditwindow):        
         gtk.VBox.__init__(self)
         
         # We have to use .geditwindow specifically here (self.window won't work)
@@ -189,7 +191,7 @@ class ResultsView(gtk.VBox):
         output = subprocess.Popen(cmd, stdout=subprocess.PIPE)
         data = output.stdout.read()
         results = data.split('\n')
-        
+               
         # Clear any current results from the side panel
         self.search_data.clear()
         
@@ -255,26 +257,26 @@ class PluginHelper:
         
     def add_panel(self, window):
         panel = self.window.get_side_panel()
-        
+
         self.results_view = ResultsView(window)
         
         image = gtk.Image()
         image.set_from_stock(gtk.STOCK_DND_MULTIPLE, gtk.ICON_SIZE_BUTTON)
-        self.ui_id = panel.add_item(self.results_view, "Find in Open Documents", image)
+        self.ui_id = panel.add_item(self.results_view, "Find under File Browser", image)
         
     def remove_menu_item(self):
         panel = self.window.get_side_panel()
         
         panel.remove_item(self.results_view)
 
-class FindInDocumentsPlugin(gedit.Plugin):
+class FindInFilesPlugin(gedit.Plugin):
     def __init__(self):
         gedit.Plugin.__init__(self)
         self.instances = {}
         
     def activate(self, window):
         self.instances[window] = PluginHelper(self, window)
-        
+
     def deactivate(self, window):
         self.instances[window].deactivate()
         
