@@ -189,7 +189,7 @@ class ResultsView(gtk.VBox):
             cmd=['grep', '-R', '-n', '-H', '-i', search_text, location]
             print "using grep. consider installing ack-grep"
           else:
-            cmd=['ack-grep','-a',search_text,location]
+            cmd=['ack-grep',search_text,location]
             print "you are using ack-grep!"
         else:
           # a case sensitive search
@@ -197,7 +197,7 @@ class ResultsView(gtk.VBox):
             cmd=['grep', '-R', '-n', '-H', search_text, location]
             print "using grep. consider installing ack-grep"
           else:
-            cmd=['ack-grep','-a', '-i', search_text,location]
+            cmd=['ack-grep', '-i', search_text,location]
             print "you are using ack-grep!"
 
         output = subprocess.Popen(cmd, stdout=subprocess.PIPE)
