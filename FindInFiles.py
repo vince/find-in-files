@@ -183,8 +183,8 @@ class ResultsView(gtk.VBox):
           
         search_text = self.search_form.get_text()
         check_ack = os.popen("which ack-grep")
-        if (not self.case_sensitive):
-          #not a case sensitive serach
+        if (self.case_sensitive):
+          #a case sensitive serach
           if len(check_ack.readlines()) == 0: 
             cmd=['grep', '-R', '-n', '-H', '-i', search_text, location]
             print "using grep. consider installing ack-grep"
@@ -192,7 +192,7 @@ class ResultsView(gtk.VBox):
             cmd=['ack-grep',search_text,location]
             print "you are using ack-grep!"
         else:
-          # a case sensitive search
+          #not a case sensitive search
           if len(check_ack.readlines()) == 0:
             cmd=['grep', '-R', '-n', '-H', search_text, location]
             print "using grep. consider installing ack-grep"
@@ -217,7 +217,8 @@ class ResultsView(gtk.VBox):
             
             if (len(pieces) == 3):
                 line_number = pieces[1]
-                filename = os.path.basename(pieces[0]) # We just want the filename, not the path
+                #filename = os.path.basename(pieces[0]) # We just want the filename, not the path
+                filename = os.path.relpath(pieces[0],location)
                 string = pieces[2].lstrip(" ") # Remove leading whitespace
 
                 # If we want to ignore comments, then we'll make sure it doesn't start with # or // or other common comment patterns. In the future it would be great to do this in context to the file type
