@@ -138,7 +138,9 @@ class ResultsView(gtk.VBox):
             # If we don't find it, we'll create it in a new tab afterwards.
             for each in documents:
 
-                if (each.get_uri().replace("file://", "") == absolute_path):
+                each_uri = each.get_uri()
+
+                if (each_uri != None and each_uri.replace("file://", "") == absolute_path):
                     # This sets the active tab to "each"
                     self.geditwindow.set_active_tab(gedit.tab_get_from_document(each))
                     each.goto_line(line_number)
