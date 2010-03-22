@@ -4,7 +4,7 @@ This plugin was written by Vince Wadhwani <twitter.com/vwadhwani> based largely 
 
 Limitations: It will only open the file from the sidepane if you have a file open. It uses the linux ack-grep or grep command to search subdirectories so it will take a long time depending on where you are.  If you develop rails and don't have ack-grep installed, I'd suggest you not search your entire Rails Root but rather just the app directory.
 
-Contributors: Special thanks to Matthew Turney (http://github.com/pho3nixf1re)
+Contributors: Special thanks to Matthew Turney (http://github.com/pho3nixf1re), Jeff Stieler (http://blog.jeffstieler.com/)
 
 Requirements: Gedit (of course) and the File Browser Pane plugin must be enabled.  
 
@@ -15,8 +15,13 @@ Usage: In the sidepane, use the file browser plugin to open to the root of your 
 The earlier Find in Documents plugin required that you have the document open in gedit.  This version allows you to search within any document in the root of the filebrowser pane (given the above limitations) If the previous behavior is preferable, please see download the original plugin from http://www.psyguygames.com/FindInDocuments_plugin.tar.gz
 
 Release notes:
+March 22, 2010
+  *.  Files in search results wouldn't open if you didn't already have a file 
+with a valid URI open, due to not checking for a valid URI when iterating 
+open documents. (from Jeff Stieler)
+
 March 18, 2010
-  *. Changed based on a patch from Matthew Turney to use relative path instead of just filename
+  *. Use relative path instead of just filename (Matthew Turney)
   *. Fixed issue where case sensitive option did the opposite
 
  November 20, 2009
