@@ -2,19 +2,20 @@ March 18, 2009:
 
 This plugin was written by Vince Wadhwani <twitter.com/vwadhwani> based largely on code from by Mike Doty <mike@psyguygames.com>. The original Find in Documents plugin is Copyright (C) 2007 Mike Doty. Parts of this code were also taken from the SnapOpen plugin which is Copyright (C) 2006 Mads Buus Jensen <online@buus.net>.
 
-Limitations: It will only open the file from the sidepane if you have a file open. It uses the linux ack-grep or grep command to search subdirectories so it will take a long time depending on where you are.  If you develop rails and don't have ack-grep installed, I'd suggest you not search your entire Rails Root but rather just the app directory.
-
 Contributors: Special thanks to Matthew Turney (http://github.com/pho3nixf1re), Jeff Stieler (http://blog.jeffstieler.com/)
 
 Requirements: Gedit (of course) and the File Browser Pane plugin must be enabled.  
 
-Installation: Copy the files to ~/.gnome2/gedit/plugins
+Installation: Copy the files to ~/.gnome2/gedit/plugins.  For a speed boost, also install ack (on Ubuntu this is done with "apt-get install ack-grep"). Note that if your distro's ack command is not 'ack-grep' you will need to modify the code around lines 188 in FindInFiles.py 
 
-Usage: In the sidepane, use the file browser plugin to open to the root of your application.  Click the FindinDocuments tab and enter a value to search by.  Click search and hopefully watch the results roll in
+Usage: In the sidepane, use the file browser plugin to open to the root of your application.  Click the FindinDocuments tab and enter a value to search by.  Click search and hopefully watch the results roll in..
 
 The earlier Find in Documents plugin required that you have the document open in gedit.  This version allows you to search within any document in the root of the filebrowser pane (given the above limitations) If the previous behavior is preferable, please see download the original plugin from http://www.psyguygames.com/FindInDocuments_plugin.tar.gz
 
 Release notes:
+March 23, 2010
+  *.  Updated README to reflect fixed bug from Jeff Stieler. Slight clarification to installation instructions.
+
 March 22, 2010
   *.  Files in search results wouldn't open if you didn't already have a file 
 with a valid URI open, due to not checking for a valid URI when iterating 
