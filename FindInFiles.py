@@ -186,22 +186,23 @@ class ResultsView(gtk.VBox):
 
         search_text = self.search_form.get_text()
         check_ack = os.popen("which ack-grep")
+        check_ack_list = check_ack.readlines()
         if (self.case_sensitive):
           #a case sensitive serach
-          if len(check_ack.readlines()) == 0:
-            cmd=['grep', '-R', '-n', '-H', '-i', search_text, location]
-            print "using grep. consider installing ack-grep"
-          else:
+          if check_ack_list:
             cmd=['ack-grep',search_text,location]
             print "you are using ack-grep!"
+          else:
+            cmd=['grep', '-R', '-n', '-H', '-i', search_text, location]
+            print "using grep. consider installing ack-grep"
         else:
           #not a case sensitive search
-          if len(check_ack.readlines()) == 0:
-            cmd=['grep', '-R', '-n', '-H', search_text, location]
-            print "using grep. consider installing ack-grep"
-          else:
+          if check_ack_list:
             cmd=['ack-grep', '-i', search_text,location]
             print "you are using ack-grep!"
+          else:
+            cmd=['grep', '-R', '-n', '-H', search_text, location]
+            print "using grep. consider installing ack-grep"
 
         output = subprocess.Popen(cmd, stdout=subprocess.PIPE)
         data = output.stdout.read()
